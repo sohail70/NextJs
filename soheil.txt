@@ -115,3 +115,23 @@ alabte kalame id kheili monaseb nist bayad customerId minveshtim az aval ke gij 
 
 mitoni folder order ro bendazi to folder pages asli age mikhay va bad folder id ro pak kuni va alan ye customer section dar va ye order section dari
 unlimited ways to structuring your routes vojod dare --> har joor dost dari anjamesh bede
+
+
+----------------------------------------
+static site generation --> https://nextjs.org/docs/basic-features/data-fetching/overview --> different options for getting data
+chalesh ine ke reuest mikham bokunim az data base va az tarafi static site mikhaym for caching  --> az getStaticProps use mikunim --> https://nextjs.org/docs/basic-features/data-fetching/get-static-props
+which will request the data at build time ahead of a users request, then those values that are retrieved from the data base or an api they are going to be harcoded in the html
+ that sent to the client. this is know as the static site and its fast and it can be easily cached by the cdns and by browsers 
+ but how about if the data changes????? we can do various thing to make the site to have up to date data ama felan tozih nemidim
+ama felan berim soraghe inke get  the data from the data source and have it diplsy in the html which will be sent as a static site --> use getStaticProps
+
+dar react aval structure page render mishe va bad request mikune be data base va bad ke information ro gerefti mitoni loop through that kuni va lazem ham bood ke msalan bebini aslan customer (data) exist hast ya na
+ama dar next js getStaticProps make the request mikune va bad dar html et mitoni mesle react application rafta kuni va display kuni va map kuni rosh 
+nokte ine ke tebghe doc bayad dar getStaticProps data ro be props object assign kuni
+va value post ham (dar doc bebin) niazi be ternary nadare ke bebini vojod dare ya na!
+
+orders ro pak kun va dar index.tsx
+
+getStatic props ham async func hast
+
+bad az por kardan boro be http://localhost:3000/customers va view page source ro bezan info haro bebin which is great for SEO

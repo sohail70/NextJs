@@ -1,6 +1,8 @@
-import { NextPage } from "next";
+import { NextPage} from "next";
 
-const Orders: NextPage = ()=>{
+
+
+const Orders: NextPage = ()=>{ 
     return <h1>All orders</h1>
 }
 
