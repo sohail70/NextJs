@@ -1,0 +1,117 @@
+NEXT topic ---> next.js ---> see some server side stuff --> djangoo ro dadim alan next.js --> react frame work for production
+
+ama chera in niaze? static rendering and server side rendering
+alan website emoon ro refresh kuni ye zamani  tool mikeshe --> masalna server slow hast
+ama aya mishe in loading ro move kunim be server side yani we make it the server responsiblity to get any data that
+we need for the page --> with the data preloaded on the server we can often make our pages static and cache them and improve our SEO 
+the third benefit is avoiding the flash of the loading page ---> vaghti refresh mikuni page ro flash nazane tasvir 
+this improves user experience
+
+SEO ???? ---> vaghti view page source ro mizani structure of the webpage ro mibini ama hich info ee az site et nemibini
+alan age search engine ya crawler ee chizi biad ino bebine nemifahme chi toshe
+pas kule idea nex.js va static and server rendering is to do all of that ahead of time on the server and then send the final result to the client
+az tarafi chun samte server hastim secret_key o in dastan ro dg negaran nistim ke dar browser expose beshe
+all the data fetching is going to be on the server side and the client just gets the data already in the html page
+ghablan az api hayee use kardim ke open bodan va niaz be key nadashtan dalil inke onja inkaro kardim in bood ke nemikhastim key ro dar cleint dashte bashim chun dangerous hast in harkat
+ama alan mishe in key ro dar next.js dashte bashe va be data base ham directly connect beshi
+hichkodom az ina be client yani oni ke dari webpageto mibine expose nemishe
+kholase dar edame mikhaym hamoon functionality hayee ke ta alan dorost kardim ro dobare ijad kunim vali mikhaym az next.js use kunim
+
+dorost mesle npx create react app  ---> npx create-next-app ham darim ---> https://nextjs.org/docs
+npx create-next-app@latest
+
+vali ma az version typescript daresh use mikunim --> npx create-next-app@latest --typescript
+
+deghat kun niaz be prerequisite Node.js 14.6.0 or newer hast tebghe doc
+
+
+structure shabih react hast vali different ham hast
+index.tsx dar folder pages mishe oon chizi ke dar page mibini
+
+how to opne the applicatio ---> npm run dev 
+
+alan masalan dar index.tsx ro negah kuni mibini component ro ye shekle dg define karde ---> hamoon shabih react hast faghat az Arrow function use kardan
+const Home : NextPage = () =>{}
+name e function Home hast va type esh NextPage hast --> NextPAge bekhatere typescript hast 
+akahresham export deafult Home mizarim
+
+alabte man negah kardam arrow function ee nanveshte fek kunam version e caleb motefavet boode
+harchi toye index.tsx hast ro begheyre div bironi ro pak kun
+va ye div ba hello benvis --->
+nokte ine ke alan site ro baz kuni view page source ro bezani ctrl+F ro bezani mitoni hello ro peyda kuni
+ama react application ro haminkaro bokoni hatta hamin ye hello sade ro nemitoni peyda kuni
+
+doc moheme ---> https://nextjs.org/docs/basic-features/data-fetching/get-static-props
+alan masalan chzi ke dari render mikuni age dependant bashe be data masalan data from an API endpoint az functionality ee be name getStaticProps use mikunim
+ke miad fetching ro ahead of time on the server anjam mide
+do model static processing darim ---> static generation va server-side rendering . dar dovomi page HTML is generated on each request
+static means unchanging --> the value is decided
+so static content in webpages means you already have all the values filled in to the html and that file can be sent to the client
+server side rendering is similar but the difference is that it doens't have static file already made instead you make a request to the server
+the server then calcualtes what that page should be on the fly and then sends it to the client --> every single request that process is gonna be happening
+so you still get that benefit of not having that loading flash up inside of a regular react application but you are not going to have the benefit of having the static files
+static content which could be distributed to the content distribution networks (CDN) which keeps a copy of these files and deliver them very quickly to people who request things from 
+you web pages --> dar doc mitoni summary inaee ke goftam ro bekhoni
+static generation recommended hast
+
+---------------------------------------------------------------
+
+pages and rounting in next.js ---> az react rahat tare --> next js is gonna use naming convention and folder structure to automatically different urls to pages
+kheili ha albate dost daran type it in code kunan va az convention lozoman tabaiat nemikunan
+vali az foder structure conventional use kuni project et consistent mishe va behtare
+alan faghat page e index.tsx darim vali mikham customers page va specific customer ham dashte bashim by id
+so how to build these pages?
+dar folder pages dar samte chap ye folder api darim
+index.tsx is the home page
+_app.tsx is a root copnent that surround everything else
+shabih hamoon structure react hast va ma oonja goftim jaye inke dar index.js kar kunim biaim dar App.js kar kunim
+farghi ham albate nadasth ma bejaye inke proceye surrounding ro dar App.js anjam bedim mitonestim dar index.js anjam bedim
+inja ham hamine
+
+ama folder api chie? folder ha dar vaghe path dar URL e browswer hastan
+masalan age be  .../api/hello dar browser bezani miri to hello.ts
+this is how api endpoint is created in next js pas ham mishe front end bashe va ham endpoint besazi vase in app et 
+
+alan npm run dev ro bezan va boro be site --> http://localhost:3000/api/hello mibini ke neveshte john doe ---> shabih bakcend shode
+ye folder customers dorost kun albate alan in path kar nemikune dar site va 404 mide
+age path with no parameters passed in bekhay bere bayad toye folder e customers ye index.tsx ijad kuni
+alan do ta index.tsx file darim ke bironi male root path hast va dovomi vase customers path hast
+khodam --> content dakhele style globals.css ro pak kardam ghaife site dorost shode
+
+hala bor be ..../api/customers ---> deghat kun ba c kochak benvisi customer ro ke 404 nade
+
+
+ravesh alterative ine ke directly toye pages folder ye chiz ijad kuni ---> masalan 
+ravesh khoob hamon ravesh ijad folder hast --> ta component paramterie shode ro behesh value pass kunim 
+
+hala specific customer chi? masalan dar url begim ../customer/12
+
+dar folder customer ye file [id].tsx dorost kun --> id mishe parameter
+
+alan folder customers ye index dare va ye [id] ke yani index vase all the customers hast va [id] vase single cusomter
+
+dar kul age file e dari ke parametrize nemikhay beshe toye hamoon folder page dorostesh kun mesle employees.tsx ee ke dorost kardim
+vali vase consistenct mitooni hamoon folder bandi kuni ma hamsho folder bandi mikunim
+
+How to get the value on the page --> [id] ro chejoori dastrasi peyda kunim dar [id].tsx
+bayad ye hook be name useRouter az next/router import kuni
+age consloe log kuni router ro mibini router ye object hast
+va dakhelesh ye query property dare ke ye object hast ke dakhelesh id ro neveshte
+chun dar browser /customer/10 bezani id mishe 10
+name id ham hamoon name e [id].tsx hast
+
+
+multiple layers of parametrization --> nested path:
+ye folder dar customers ijad kun ba name e [id] va dakhelesh ye folder dg be name orders va dakhelesh ye file be name index.tsx --> site mishe in .../customers/12/orders
+pas dar browser benvis ---> http://localhost:3000/customers/14/orders
+
+specific order for specific customer chi? folder bandi chejoorie? dar folder orders bayad ye file jadid ijad kuni [orderid].tsx
+
+alan mishe vase speicifc customer specific order peyda kard --> boro be in site ---> http://localhost:3000/customers/14/orders/20  --> addad haro mitooni harchi bezari
+
+deghak kun dar [orderId] ham orderId va ham khode id ghabele dastrasi hast
+
+alabte kalame id kheili monaseb nist bayad customerId minveshtim az aval ke gij konnande nabashe
+
+mitoni folder order ro bendazi to folder pages asli age mikhay va bad folder id ro pak kuni va alan ye customer section dar va ye order section dari
+unlimited ways to structuring your routes vojod dare --> har joor dost dari anjamesh bede
